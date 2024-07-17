@@ -23,11 +23,11 @@ public class Account {
     @Column(name = "additional_limit", precision = 13, scale = 2)
     private BigDecimal limit;
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
