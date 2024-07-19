@@ -7,3 +7,7 @@ spring:
     open-in-view: false
     hibernate:
       ddl-auto: create
+  logging:
+    level:
+      org.hibernate: DEBUG
+      org.springframework: DEBUG
