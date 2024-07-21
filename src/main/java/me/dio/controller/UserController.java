@@ -1,7 +1,7 @@
-package me.dio.domain.controller;
+package me.dio.controller;
 
 import me.dio.domain.model.User;
-import me.dio.domain.service.UserService;
+import me.dio.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -33,4 +33,17 @@ public class UserController {
                 .toUri();
         return ResponseEntity.created(location).body(userCreated);
     }
+
+    @DeleteMapping
+    public ResponseEntity<User> delete(){
+        // TODO
+        return null;
+    }
+
+    @PutMapping
+    public ResponseEntity<User> update(){
+        // TODO
+        return null;
+    }
+
 }
