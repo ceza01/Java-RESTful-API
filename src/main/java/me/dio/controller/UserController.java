@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -34,10 +35,11 @@ public class UserController {
         return ResponseEntity.created(location).body(userCreated);
     }
 
-    @DeleteMapping
-    public ResponseEntity<User> delete(){
-        // TODO
-        return null;
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id){
+        var userToDelete = userService.findById(id);
+        userService.delete(userToDelete);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping

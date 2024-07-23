@@ -3,6 +3,7 @@ package me.dio.service.impl;
 import me.dio.domain.model.User;
 import me.dio.domain.repository.UserRepository;
 import me.dio.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
@@ -30,12 +31,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User delete(User userToDelete) {
-        if (!userRepository.existsByAccountNumber(userToDelete.getAccount().getNumber())){
+    public void delete(User userToDelete) {
+        if (!userRepository.existsById(userToDelete.getId())){
             throw new IllegalArgumentException("This account number don't exist");
         }
         userRepository.delete(userToDelete);
-        return userToDelete;
     }
 
     @Override
@@ -45,6 +45,4 @@ public class UserServiceImpl implements UserService {
         }
         return userRepository.save(userToUpdate);
     }
-
-
 }
