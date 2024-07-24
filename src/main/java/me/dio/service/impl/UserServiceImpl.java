@@ -3,10 +3,10 @@ package me.dio.service.impl;
 import me.dio.domain.model.User;
 import me.dio.domain.repository.UserRepository;
 import me.dio.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -32,17 +32,26 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(User userToDelete) {
-        if (!userRepository.existsById(userToDelete.getId())){
+        if (!userRepository.existsById(userToDelete.getId())) {
             throw new IllegalArgumentException("This account number don't exist");
         }
         userRepository.delete(userToDelete);
     }
 
     @Override
-    public User update(User userToUpdate) {
-        if (!userRepository.existsByAccountNumber(userToUpdate.getAccount().getNumber())) {
-            throw new IllegalArgumentException("This account number doesn't exist");
+    public User update(Long id, User userToUpdate) {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isEmpty()) {
+            throw new IllegalArgumentException("This account don't exist");
         }
-        return userRepository.save(userToUpdate);
+
+        User userUpdate = user.get();
+        userUpdate.setName(userToUpdate.getName());
+        userUpdate.setAccount(userToUpdate.getAccount());
+        userUpdate.setCard(userToUpdate.getCard());
+        userUpdate.setFeatures(userToUpdate.getFeatures());
+        userUpdate.setNews(userToUpdate.getNews());
+
+        return userRepository.save(userUpdate);
     }
 }

@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/users")
@@ -42,10 +41,10 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping
-    public ResponseEntity<User> update(){
-        // TODO
-        return null;
+    @PutMapping("/{id}")
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
+        userService.update(id, user);
+        return ResponseEntity.ok().body(user);
     }
 
 }

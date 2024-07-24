@@ -1,7 +1,6 @@
 package me.dio.service;
 
 import me.dio.domain.model.User;
-import org.springframework.http.ResponseEntity;
 
 public interface UserService {
     User findById(Long id);
@@ -10,5 +9,5 @@ public interface UserService {
 
     void delete(User userToDelete);
 
-    User update(User userToUpdate);
+    User update(Long id, User userToUpdate);
 }
