@@ -18,6 +18,11 @@ public class UserController {
         this.userService = userService;
     }
 
+    @GetMapping
+    public ResponseEntity<Iterable<User>> findAll(){
+        return ResponseEntity.ok(userService.findAll());
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<User> findById(@PathVariable Long id){
         var user = userService.findById(id);
